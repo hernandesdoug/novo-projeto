@@ -10,3 +10,56 @@ html,
 body  {
   min-width: 100vw;
 }
+
+#container {
+  height: 100%;
+  display: flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  margin: 10px;
+  padding: 20px;
+  justify-content: center;
+}
+
+#titulo-api{
+  width: 80%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  text-transform: uppercase;
+  font-family: "News Cycle", sans-serif;
+  font-weight: bold;
+  color: #000;
+  background-color: aliceblue;
+}
+
+table {
+  table-layout: fixed;
+  width: 80%;
+  min-width: 1000px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  border-left: 1px solid #999;
+  border-right: 1px solid #999;
+}
+
+th {
+  vertical-align: top;
+  padding: 0.3em;
+  text-align: left;
+  align-content: flex-start;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+  color: aliceblue;
+}
+
+td {
+  padding: 0.3em;
+  text-align: left;
+  align-content: flex-start;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+  color: aliceblue;
+}
