@@ -52,7 +52,7 @@ th {
   align-content: flex-start;
   border-bottom: 1px solid #999;
   border-right: 1px solid #999;
-  color: aliceblue;
+  color: #000;
 }
 
 td {
@@ -61,5 +61,5 @@ td {
   align-content: flex-start;
   border-bottom: 1px solid #999;
   border-right: 1px solid #999;
-  color: aliceblue;
+  color: #000;
 }
