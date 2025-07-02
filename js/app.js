@@ -14,7 +14,7 @@ async function testaApi(){
 
     posts.forEach(item => {
         const dados = item;
-        linha(tbody, dados);
+        linhaColuna(tbody, dados);
     });
 }
 function cabecalho(thead, titulo){
@@ -23,7 +23,7 @@ function cabecalho(thead, titulo){
     thead.appendChild(th);
 }
 
-function linha(tbody, dados){
+function linhaColuna(tbody, dados){
     const tr = document.createElement("tr");
     const td1 = document.createElement("td");
     td1.innerHTML = dados.id;
