@@ -5,29 +5,38 @@ async function testaApi(){
     const table = document.createElement("table");
     const thead = document.createElement("thead");
     const tbody = document.createElement("tbody");
-    table.appendChild(thead);
+    cabecalho(thead, 'ID');
+    cabecalho(thead, 'Title');
+    cabecalho(thead, 'Views');
+    table.appendChild(thead);   
     table.appendChild(tbody);
     document.getElementById("tabela-api").appendChild(table);
 
     posts.forEach(item => {
-        const tr = document.createElement("tr");
-
-        const td1 = document.createElement("td");
-        const id = item.id;
-        td1.innerHTML = id;
-        tr.appendChild(td1);
-
-        const td2 = document.createElement("td");
-        const title = item.title;
-        td2.innerHTML = title;
-        tr.appendChild(td2);
-
-        const td3 = document.createElement("td");
-        const views = item.views;
-        td3.innerHTML = views;
-        tr.appendChild(td3);
-
-        tbody.appendChild(tr);
+        const dados = item;
+        linha(tbody, dados);
     });
+}
+function cabecalho(thead, titulo){
+    const th = document.createElement("th");
+    th.innerHTML = titulo;
+    thead.appendChild(th);
+}
+
+function linha(tbody, dados){
+    const tr = document.createElement("tr");
+    const td1 = document.createElement("td");
+    td1.innerHTML = dados.id;
+    tr.appendChild(td1);
+
+    const td2 = document.createElement("td");
+    td2.innerHTML = dados.title;
+    tr.appendChild(td2);
+
+    const td3 = document.createElement("td");
+    td3.innerHTML = dados.views;
+    tr.appendChild(td3);
+
+    tbody.appendChild(tr);
 }
 document.addEventListener("DOMContentLoader", testaApi());
