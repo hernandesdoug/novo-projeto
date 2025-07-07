@@ -1,3 +1,4 @@
+let id = '';
 async function novoRegistro(event){
     event.preventDefault();
     const title = document.getElementById("title").value;
@@ -11,17 +12,24 @@ async function novoRegistro(event){
 }
 async function alteraRegistro(event){
     event.preventDefault();
-    const response = await fetch("http://localhost:3000/posts/ebba", { 
+    const title = document.getElementById("title").value;
+    const views = document.getElementById("views").value;
+    const response = await fetch(`http://localhost:3000/posts/${id}`, { 
         method:"put",
-        body:JSON.stringify({title: "novo titulo", views: 150})
+        body:JSON.stringify({title, views})
     });
     console.log(response);
 }
 async function deletaRegistro(event){
     event.preventDefault();
-    const response = await fetch("http://localhost:3000/posts/ebba", { 
-        method:"delete",
-        body:JSON.stringify({title, views})
+    const response = await fetch(`http://localhost:3000/posts/${id}`, { 
+        method:"delete"
     });
     console.log(response);
 }
+document.addEventListener("DOMContentLoaded", function(){
+    const params = new URLSearchParams(document.location.search);
+  
+    const param = params.get("id");
+    id = param; 
+});

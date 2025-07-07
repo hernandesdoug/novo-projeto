@@ -16,6 +16,7 @@ function montaPosts(posts, tabela) {
     cabecalho(thead, 'id');
     cabecalho(thead, 'title');
     cabecalho(thead, 'views');
+    cabecalho(thead, 'Ações');
     table.appendChild(thead);   
     table.appendChild(tbody);
     document.getElementById("tabela-posts").appendChild(table);
@@ -34,6 +35,7 @@ function montaComments(comments, tabela) {
     cabecalho(thead, 'id');
     cabecalho(thead, 'text');
     cabecalho(thead, 'postId');
+    cabecalho(thead, 'Ações');
     table.appendChild(thead);   
     table.appendChild(tbody);
     document.getElementById("tabela-comments").appendChild(table);
@@ -63,6 +65,13 @@ function linhaPosts(tbody, dados){
     const td3 = document.createElement("td");
     td3.innerHTML = dados.views;
     tr.appendChild(td3);
+
+    const td4 = document.createElement("td");
+    const a = document.createElement("a");
+    a.setAttribute("href", `post.html?id=${dados.id}`);
+    a.innerHTML = "editar";
+    td4.appendChild(a);
+    tr.appendChild(td4);
 
     tbody.appendChild(tr);
 }
