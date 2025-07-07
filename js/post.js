@@ -33,3 +33,4 @@ document.addEventListener("DOMContentLoaded", function(){
     const param = params.get("id");
     id = param; 
 });
+// caputrar valores de input ao clicar no botao editar <- nao esquecer

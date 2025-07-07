@@ -89,6 +89,13 @@ function linhaComments(tbody, dados){
     td3.innerHTML = dados.postId;
     tr.appendChild(td3);
 
+    const td4 = document.createElement("td");
+    const a = document.createElement("a");
+    a.setAttribute("href", `post.html?id=${dados.id}`);
+    a.innerHTML = "editar";
+    td4.appendChild(a);
+    tr.appendChild(td4);
+
     tbody.appendChild(tr);
 }
 document.addEventListener("DOMContentLoader", testaApi());
