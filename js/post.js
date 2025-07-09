@@ -32,5 +32,14 @@ document.addEventListener("DOMContentLoaded", function(){
   
     const param = params.get("id");
     id = param; 
+
+    const titleInput = document.getElementById("title");
+    const valorTitle = localStorage.getItem('td2');
+    titleInput.value = valorTitle;
+    console.log(valorTitle);
+
+    const viewsInput = document.getElementById("views");
+    const valorViews = localStorage.getItem('td3');
+    viewsInput.value = valorViews;
+    console.log(valorViews);
 });
-// caputrar valores de input ao clicar no botao editar <- nao esquecer

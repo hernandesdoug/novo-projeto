@@ -6,6 +6,7 @@ async function testaApi(){
     const respComments = await fetch("http://localhost:3000/comments");
     const comments = await respComments.json(); 
     montaComments(comments, 'Comments');
+
 }
 
 function montaPosts(posts, tabela) {
@@ -62,9 +63,17 @@ function linhaPosts(tbody, dados){
     td2.innerHTML = dados.title;
     tr.appendChild(td2);
 
+    const valorTitle = dados.title;
+    localStorage.setItem('td2',valorTitle);
+    console.log(valorTitle);
+
     const td3 = document.createElement("td");
     td3.innerHTML = dados.views;
     tr.appendChild(td3);
+
+    const valorViews = dados.views;
+    localStorage.setItem('td3', valorViews);
+    console.log(valorViews);
 
     const td4 = document.createElement("td");
     const a = document.createElement("a");
@@ -91,6 +100,7 @@ function linhaComments(tbody, dados){
 
     const td4 = document.createElement("td");
     const a = document.createElement("a");
+    
     a.setAttribute("href", `post.html?id=${dados.id}`);
     a.innerHTML = "editar";
     td4.appendChild(a);
@@ -98,4 +108,4 @@ function linhaComments(tbody, dados){
 
     tbody.appendChild(tr);
 }
-document.addEventListener("DOMContentLoader", testaApi());
+document.addEventListener("DOMContentLoaded", testaApi());
