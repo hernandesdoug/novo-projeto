@@ -1,45 +1,59 @@
 let id = '';
-async function novoRegistro(event){
+let tipo = '';
+async function novoRegistro(event) {
     event.preventDefault();
     const title = document.getElementById("title").value;
     const views = document.getElementById("views").value;
-    const response = await fetch("http://localhost:3000/posts", { 
-        method:"post",
-        body:JSON.stringify({title, views})
+    const response = await fetch(`http://localhost:3000/${tipo}`, {
+        method: "post",
+        body: JSON.stringify({ title, views })
     });
     console.log(response);
-    console.log(await response.json() );
+    console.log(await response.json());
 }
-async function alteraRegistro(event){
+async function alteraRegistro(event) {
     event.preventDefault();
     const title = document.getElementById("title").value;
     const views = document.getElementById("views").value;
-    const response = await fetch(`http://localhost:3000/posts/${id}`, { 
-        method:"put",
-        body:JSON.stringify({title, views})
+    const response = await fetch(`http://localhost:3000/${tipo}/${id}`, {
+        method: "put",
+        body: JSON.stringify({ title, views })
     });
     console.log(response);
 }
-async function deletaRegistro(event){
+async function deletaRegistro(event) {
     event.preventDefault();
-    const response = await fetch(`http://localhost:3000/posts/${id}`, { 
-        method:"delete"
+    const response = await fetch(`http://localhost:3000/${tipo}/${id}`, {
+        method: "delete"
     });
     console.log(response);
 }
-document.addEventListener("DOMContentLoaded", function(){
-    const params = new URLSearchParams(document.location.search);
-  
-    const param = params.get("id");
-    id = param; 
+async function buscaId() {
 
+    const response = await fetch(`http://localhost:3000/${tipo}/${id}`);
+    const dados = await response.json();
     const titleInput = document.getElementById("title");
-    const valorTitle = localStorage.getItem('td2');
-    titleInput.value = valorTitle;
-    console.log(valorTitle);
-
     const viewsInput = document.getElementById("views");
-    const valorViews = localStorage.getItem('td3');
-    viewsInput.value = valorViews;
-    console.log(valorViews);
+    if (tipo == 'posts') {
+        titleInput.value = dados.title;
+        viewsInput.value = dados.views;
+    }
+    if (tipo == 'comments') {
+        titleInput.value = dados.text;
+        viewsInput.value = dados.postId;
+    }
+
+    console.log(dados);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(document.location.search);
+
+    const param = params.get("id");
+    id = param;
+    const paramTipo = params.get("tipo");
+    tipo = paramTipo;
+
+    buscaId();
+
 });

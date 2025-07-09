@@ -63,21 +63,14 @@ function linhaPosts(tbody, dados){
     td2.innerHTML = dados.title;
     tr.appendChild(td2);
 
-    const valorTitle = dados.title;
-    localStorage.setItem('td2',valorTitle);
-    console.log(valorTitle);
 
     const td3 = document.createElement("td");
     td3.innerHTML = dados.views;
     tr.appendChild(td3);
 
-    const valorViews = dados.views;
-    localStorage.setItem('td3', valorViews);
-    console.log(valorViews);
-
     const td4 = document.createElement("td");
     const a = document.createElement("a");
-    a.setAttribute("href", `post.html?id=${dados.id}`);
+    a.setAttribute("href", `post.html?id=${dados.id}&tipo=posts`);
     a.innerHTML = "editar";
     td4.appendChild(a);
     tr.appendChild(td4);
@@ -101,7 +94,7 @@ function linhaComments(tbody, dados){
     const td4 = document.createElement("td");
     const a = document.createElement("a");
     
-    a.setAttribute("href", `post.html?id=${dados.id}`);
+    a.setAttribute("href", `post.html?id=${dados.id}&tipo=comments`);
     a.innerHTML = "editar";
     td4.appendChild(a);
     tr.appendChild(td4);
