@@ -1,49 +1,51 @@
+let tabelaExiste = false;
 async function testaApi(){
-    const response = await fetch("http://localhost:3000/posts");
-    const posts = await response.json(); 
-    montaPosts(posts, 'Posts');
+    if (!tabelaExiste) {
+        const response = await fetch("http://localhost:3333/usuarios");
+        const usuarios = await response.json(); 
+        montaUsuarios(usuarios);
+    
+        const respComments = await fetch("http://localhost:3333/empresas");
+        const empresas = await respComments.json(); 
+        montaEmpresas(empresas);
 
-    const respComments = await fetch("http://localhost:3000/comments");
-    const comments = await respComments.json(); 
-    montaComments(comments, 'Comments');
-
+        tabelaExiste = true;
+    }
 }
 
-function montaPosts(posts, tabela) {
+function montaUsuarios(usuarios) {
     const table = document.createElement("table");
-    table.id = tabela;
     const thead = document.createElement("thead");
     const tbody = document.createElement("tbody");
     cabecalho(thead, 'id');
-    cabecalho(thead, 'title');
-    cabecalho(thead, 'views');
+    cabecalho(thead, 'nome');
+    cabecalho(thead, 'email');
     cabecalho(thead, 'Ações');
     table.appendChild(thead);   
     table.appendChild(tbody);
     document.getElementById("tabela-posts").appendChild(table);
 
-    posts.forEach(item => {
+    usuarios.forEach(item => {
         const dados = item;
-        linhaPosts(tbody, dados);
+        linhaUsuarios(tbody, dados);
     });
 }
 
-function montaComments(comments, tabela) {
+function montaEmpresas(empresas) {
     const table = document.createElement("table");
-    table.id = tabela;
     const thead = document.createElement("thead");
     const tbody = document.createElement("tbody");
     cabecalho(thead, 'id');
-    cabecalho(thead, 'text');
-    cabecalho(thead, 'postId');
+    cabecalho(thead, 'nome Empresa');
+    cabecalho(thead, 'usuarioId');
     cabecalho(thead, 'Ações');
     table.appendChild(thead);   
     table.appendChild(tbody);
     document.getElementById("tabela-comments").appendChild(table);
 
-    comments.forEach(item => {
+    empresas.forEach(item => {
         const dados = item;
-        linhaComments(tbody, dados);
+        linhaEmpresas(tbody, dados);
     });
 }
 
@@ -53,52 +55,53 @@ function cabecalho(thead, titulo){
     thead.appendChild(th);
 }
 
-function linhaPosts(tbody, dados){
+function linhaUsuarios(tbody, dados){
     const tr = document.createElement("tr");
     const td1 = document.createElement("td");
     td1.innerHTML = dados.id;
     tr.appendChild(td1);
 
     const td2 = document.createElement("td");
-    td2.innerHTML = dados.title;
+    td2.innerHTML = dados.nome;
     tr.appendChild(td2);
 
 
     const td3 = document.createElement("td");
-    td3.innerHTML = dados.views;
+    td3.innerHTML = dados.email;
     tr.appendChild(td3);
 
     const td4 = document.createElement("td");
     const a = document.createElement("a");
-    a.setAttribute("href", `post.html?id=${dados.id}&tipo=posts`);
+    a.setAttribute("href", `post.html?id=${dados.id}&tipo=usuarios`);
     a.innerHTML = "editar";
     td4.appendChild(a);
     tr.appendChild(td4);
 
     tbody.appendChild(tr);
 }
-function linhaComments(tbody, dados){
+function linhaEmpresas(tbody, dados){
     const tr = document.createElement("tr");
     const td1 = document.createElement("td");
     td1.innerHTML = dados.id;
     tr.appendChild(td1);
 
     const td2 = document.createElement("td");
-    td2.innerHTML = dados.text;
+    td2.innerHTML = dados.nomeEmpresa;
     tr.appendChild(td2);
 
     const td3 = document.createElement("td");
-    td3.innerHTML = dados.postId;
+    td3.innerHTML = dados.usuarioId;
     tr.appendChild(td3);
 
     const td4 = document.createElement("td");
     const a = document.createElement("a");
     
-    a.setAttribute("href", `post.html?id=${dados.id}&tipo=comments`);
+    a.setAttribute("href", `post.html?id=${dados.id}&tipo=empresas`);
     a.innerHTML = "editar";
     td4.appendChild(a);
     tr.appendChild(td4);
 
     tbody.appendChild(tr);
 }
-document.addEventListener("DOMContentLoaded", testaApi());
+document.addEventListener("DOMContentLoaded", function() {
+});

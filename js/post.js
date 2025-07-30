@@ -2,45 +2,51 @@ let id = '';
 let tipo = '';
 async function novoRegistro(event) {
     event.preventDefault();
-    const title = document.getElementById("title").value;
-    const views = document.getElementById("views").value;
-    const response = await fetch(`http://localhost:3000/${tipo}`, {
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const response = await fetch(`http://localhost:3333/${tipo}`, {
         method: "post",
-        body: JSON.stringify({ title, views })
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({ nome, email, senha })
     });
     console.log(response);
     console.log(await response.json());
 }
 async function alteraRegistro(event) {
     event.preventDefault();
-    const title = document.getElementById("title").value;
-    const views = document.getElementById("views").value;
-    const response = await fetch(`http://localhost:3000/${tipo}/${id}`, {
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const response = await fetch(`http://localhost:3333/${tipo}/${id}`, {
         method: "put",
-        body: JSON.stringify({ title, views })
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({ nome, email, senha:"1234" })
     });
     console.log(response);
 }
 async function deletaRegistro(event) {
     event.preventDefault();
-    const response = await fetch(`http://localhost:3000/${tipo}/${id}`, {
+    const response = await fetch(`http://localhost:3333/${tipo}/${id}`, {
         method: "delete"
     });
     console.log(response);
 }
 async function buscaId() {
 
-    const response = await fetch(`http://localhost:3000/${tipo}/${id}`);
+    const response = await fetch(`http://localhost:3333/${tipo}/${id}`);
     const dados = await response.json();
-    const titleInput = document.getElementById("title");
-    const viewsInput = document.getElementById("views");
-    if (tipo == 'posts') {
-        titleInput.value = dados.title;
-        viewsInput.value = dados.views;
+    const nomeInput = document.getElementById("nome");
+    const emailInput = document.getElementById("email");
+    if (tipo == 'usuarios') {
+        nomeInput.value = dados.nome;
+        emailInput.value = dados.email;
     }
-    if (tipo == 'comments') {
-        titleInput.value = dados.text;
-        viewsInput.value = dados.postId;
+    if (tipo == 'empresas') {
+        nomeInput.value = dados.nome;
+        emailInput.value = dados.email;
     }
 
     console.log(dados);
