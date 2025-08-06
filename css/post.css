@@ -12,6 +12,7 @@ body  {
 }
 
 #container,
+#botao, 
 form {
     height: 100%;
     display: flex;
